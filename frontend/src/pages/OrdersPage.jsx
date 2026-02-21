@@ -168,7 +168,7 @@ const OrdersPage = () => {
                         Total Amount
                       </Typography>
                       <Typography variant="h5" color="primary" sx={{ fontWeight: 700 }}>
-                        ${order.totalAmount.toFixed(2)}
+                        ${order.totalAmount != null ? Number(order.totalAmount).toFixed(2) : '0.00'}
                       </Typography>
                     </Box>
                   </Box>
