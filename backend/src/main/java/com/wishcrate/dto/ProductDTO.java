@@ -21,6 +21,7 @@ public class ProductDTO {
     private Map<String, String> specifications;
     private boolean featured;
     private boolean active;
+    private String imageUrl;
 
     public ProductDTO() {}
 
@@ -76,6 +77,9 @@ public class ProductDTO {
     public boolean isActive() { return active; }
     public void setActive(boolean active) { this.active = active; }
 
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
     public static class ProductDTOBuilder {
         private Long id;
         private String name;
@@ -93,6 +97,7 @@ public class ProductDTO {
         private Map<String, String> specifications;
         private boolean featured;
         private boolean active;
+        private String imageUrl;
 
         public ProductDTOBuilder id(Long id) { this.id = id; return this; }
         public ProductDTOBuilder name(String name) { this.name = name; return this; }
@@ -110,6 +115,7 @@ public class ProductDTO {
         public ProductDTOBuilder specifications(Map<String, String> specifications) { this.specifications = specifications; return this; }
         public ProductDTOBuilder featured(boolean featured) { this.featured = featured; return this; }
         public ProductDTOBuilder active(boolean active) { this.active = active; return this; }
+        public ProductDTOBuilder imageUrl(String imageUrl) { this.imageUrl = imageUrl; return this; }
 
         public ProductDTO build() {
             ProductDTO dto = new ProductDTO();
@@ -129,6 +135,7 @@ public class ProductDTO {
             dto.specifications = this.specifications;
             dto.featured = this.featured;
             dto.active = this.active;
+            dto.imageUrl = this.imageUrl;
             return dto;
         }
     }

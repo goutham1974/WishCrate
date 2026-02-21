@@ -1,18 +1,19 @@
 package com.wishcrate.service;
 
-import com.wishcrate.dto.ProductDTO;
-import com.wishcrate.model.Category;
-import com.wishcrate.model.Product;
-import com.wishcrate.repository.CategoryRepository;
-import com.wishcrate.repository.ProductRepository;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.wishcrate.dto.ProductDTO;
+import com.wishcrate.model.Category;
+import com.wishcrate.model.Product;
+import com.wishcrate.repository.CategoryRepository;
+import com.wishcrate.repository.ProductRepository;
 
 @Service
 public class ProductService {
@@ -71,6 +72,7 @@ public class ProductService {
                 .stockQuantity(productDTO.getStockQuantity())
                 .brand(productDTO.getBrand())
                 .images(productDTO.getImages())
+                .imageUrl(productDTO.getImageUrl())
                 .category(category)
                 .sku(productDTO.getSku())
                 .specifications(productDTO.getSpecifications())
@@ -100,6 +102,7 @@ public class ProductService {
         product.setStockQuantity(productDTO.getStockQuantity());
         product.setBrand(productDTO.getBrand());
         product.setImages(productDTO.getImages());
+        product.setImageUrl(productDTO.getImageUrl());
         product.setSku(productDTO.getSku());
         product.setSpecifications(productDTO.getSpecifications());
         product.setFeatured(productDTO.isFeatured());
@@ -126,6 +129,7 @@ public class ProductService {
                 .stockQuantity(product.getStockQuantity())
                 .brand(product.getBrand())
                 .images(product.getImages())
+                .imageUrl(product.getImageUrl())
                 .categoryId(product.getCategory() != null ? product.getCategory().getId() : null)
                 .categoryName(product.getCategory() != null ? product.getCategory().getName() : null)
                 .averageRating(product.getAverageRating())

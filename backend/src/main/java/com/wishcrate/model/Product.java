@@ -1,14 +1,29 @@
 package com.wishcrate.model;
 
-import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapKeyColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "products")
@@ -62,6 +77,8 @@ public class Product {
     private boolean featured = false;
     
     private boolean active = true;
+
+    private String imageUrl;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id")
@@ -159,6 +176,9 @@ public class Product {
     
     public boolean isActive() { return active; }
     public void setActive(boolean active) { this.active = active; }
+
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
     
     public User getSeller() { return seller; }
     public void setSeller(User seller) { this.seller = seller; }
@@ -191,6 +211,7 @@ public class Product {
         private java.util.Map<String, String> specifications = new java.util.HashMap<>();
         private boolean featured = false;
         private boolean active = true;
+        private String imageUrl;
         private User seller;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
@@ -211,14 +232,17 @@ public class Product {
         public ProductBuilder specifications(java.util.Map<String, String> specifications) { this.specifications = specifications; return this; }
         public ProductBuilder featured(boolean featured) { this.featured = featured; return this; }
         public ProductBuilder active(boolean active) { this.active = active; return this; }
+        public ProductBuilder imageUrl(String imageUrl) { this.imageUrl = imageUrl; return this; }
         public ProductBuilder seller(User seller) { this.seller = seller; return this; }
         public ProductBuilder createdAt(LocalDateTime createdAt) { this.createdAt = createdAt; return this; }
         public ProductBuilder updatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; return this; }
         
         public Product build() {
-            return new Product(id, name, description, price, discountPrice, stockQuantity, brand,
+            Product p = new Product(id, name, description, price, discountPrice, stockQuantity, brand,
                              images, category, reviews, averageRating, totalReviews, sku,
                              specifications, featured, active, seller, createdAt, updatedAt);
+            p.setImageUrl(imageUrl);
+            return p;
         }
     }
 }

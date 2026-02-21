@@ -83,7 +83,7 @@ const ProductCard = ({ product }) => {
           <CardMedia
             component="img"
             height="240"
-            image={product.images?.[0] || 'https://via.placeholder.com/300'}
+            image={product.imageUrl || product.images?.[0] || 'https://via.placeholder.com/300'}
             alt={product.name}
             sx={{
               objectFit: 'cover',
